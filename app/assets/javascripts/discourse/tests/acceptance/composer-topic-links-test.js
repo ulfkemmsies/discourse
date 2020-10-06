@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import {
   acceptance,
   updateCurrentUser,
@@ -12,7 +13,7 @@ acceptance("Composer topic featured links", {
   },
 });
 
-QUnit.test("onebox with title", async (assert) => {
+test("onebox with title", async (assert) => {
   await visit("/");
   await click("#create-topic");
   await fillIn("#reply-title", "http://www.example.com/has-title.html");
@@ -31,7 +32,7 @@ QUnit.test("onebox with title", async (assert) => {
   );
 });
 
-QUnit.test("onebox result doesn't include a title", async (assert) => {
+test("onebox result doesn't include a title", async (assert) => {
   await visit("/");
   await click("#create-topic");
   await fillIn("#reply-title", "http://www.example.com/no-title.html");
@@ -50,7 +51,7 @@ QUnit.test("onebox result doesn't include a title", async (assert) => {
   );
 });
 
-QUnit.test("no onebox result", async (assert) => {
+test("no onebox result", async (assert) => {
   await visit("/");
   await click("#create-topic");
   await fillIn("#reply-title", "http://www.example.com/nope-onebox.html");
@@ -69,7 +70,7 @@ QUnit.test("no onebox result", async (assert) => {
   );
 });
 
-QUnit.test("ignore internal links", async (assert) => {
+test("ignore internal links", async (assert) => {
   await visit("/");
   await click("#create-topic");
   const title = "http://" + window.location.hostname + "/internal-page.html";
@@ -87,7 +88,7 @@ QUnit.test("ignore internal links", async (assert) => {
   assert.equal(find(".title-input input").val(), title, "title is unchanged");
 });
 
-QUnit.test("link is longer than max title length", async (assert) => {
+test("link is longer than max title length", async (assert) => {
   await visit("/");
   await click("#create-topic");
   await fillIn(
@@ -109,7 +110,7 @@ QUnit.test("link is longer than max title length", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "onebox with title but extra words in title field",
   async (assert) => {
     await visit("/");
@@ -143,7 +144,7 @@ acceptance("Composer topic featured links when uncategorized is not allowed", {
   },
 });
 
-QUnit.test("Pasting a link enables the text input area", async (assert) => {
+test("Pasting a link enables the text input area", async (assert) => {
   updateCurrentUser({ moderator: false, admin: false, trust_level: 1 });
 
   await visit("/");

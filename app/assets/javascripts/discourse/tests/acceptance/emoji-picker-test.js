@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
 acceptance("EmojiPicker", {
@@ -11,7 +12,7 @@ acceptance("EmojiPicker", {
   },
 });
 
-QUnit.test("emoji picker can be opened/closed", async (assert) => {
+test("emoji picker can be opened/closed", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click("#topic-footer-buttons .btn.create");
 
@@ -22,7 +23,7 @@ QUnit.test("emoji picker can be opened/closed", async (assert) => {
   assert.notOk(exists(".emoji-picker.opened"), "it closes the picker");
 });
 
-QUnit.test("emoji picker triggers event when picking emoji", async (assert) => {
+test("emoji picker triggers event when picking emoji", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click("#topic-footer-buttons .btn.create");
   await click("button.emoji.btn");
@@ -35,7 +36,7 @@ QUnit.test("emoji picker triggers event when picking emoji", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "emoji picker adds leading whitespace before emoji",
   async (assert) => {
     await visit("/t/internationalization-localization/280");
@@ -63,7 +64,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "emoji picker has a list of recently used emojis",
   async (assert) => {
     await visit("/t/internationalization-localization/280");
@@ -104,7 +105,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "emoji picker correctly orders recently used emojis",
   async (assert) => {
     await visit("/t/internationalization-localization/280");
@@ -129,7 +130,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("emoji picker persists state", async (assert) => {
+test("emoji picker persists state", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click("#topic-footer-buttons .btn.create");
   await click("button.emoji.btn");

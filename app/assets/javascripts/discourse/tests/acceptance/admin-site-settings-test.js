@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 import siteSettingFixture from "discourse/tests/fixtures/site-settings";
 
@@ -29,7 +30,7 @@ acceptance("Admin - Site Settings", {
   },
 });
 
-QUnit.test("upload site setting", async (assert) => {
+test("upload site setting", async (assert) => {
   await visit("/admin/site_settings");
 
   assert.ok(
@@ -40,7 +41,7 @@ QUnit.test("upload site setting", async (assert) => {
   assert.ok(exists(".row.setting.upload .undo"), "undo button is present");
 });
 
-QUnit.test("changing value updates dirty state", async (assert) => {
+test("changing value updates dirty state", async (assert) => {
   await visit("/admin/site_settings");
   await fillIn("#setting-filter", " title ");
   assert.equal(count(".row.setting"), 1, "filter returns 1 site setting");
@@ -87,7 +88,7 @@ QUnit.test("changing value updates dirty state", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "always shows filtered site settings if a filter is set",
   async (assert) => {
     await visit("/admin/site_settings");
@@ -104,7 +105,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("filter settings by plugin name", async (assert) => {
+test("filter settings by plugin name", async (assert) => {
   await visit("/admin/site_settings");
 
   await fillIn("#setting-filter", "plugin:discourse-logo");
@@ -115,12 +116,12 @@ QUnit.test("filter settings by plugin name", async (assert) => {
   assert.equal(count(".row.setting"), 0);
 });
 
-QUnit.test("category name is preserved", async (assert) => {
+test("category name is preserved", async (assert) => {
   await visit("admin/site_settings/category/basic?filter=menu");
   assert.equal(currentURL(), "admin/site_settings/category/basic?filter=menu");
 });
 
-QUnit.test("shows all_results if current category has none", async (assert) => {
+test("shows all_results if current category has none", async (assert) => {
   await visit("admin/site_settings");
 
   await click(".admin-nav .basic a");

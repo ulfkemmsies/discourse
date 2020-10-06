@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import DiscourseURL from "discourse/lib/url";
 import selectKit from "discourse/tests/helpers/select-kit-helper";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
@@ -9,7 +10,7 @@ acceptance("Topic Discovery", {
   },
 });
 
-QUnit.test("Visit Discovery Pages", async (assert) => {
+test("Visit Discovery Pages", async (assert) => {
   await visit("/");
   assert.ok($("body.navigation-topics").length, "has the default navigation");
   assert.ok(exists(".topic-list"), "The list of topics was rendered");
@@ -68,7 +69,7 @@ QUnit.test("Visit Discovery Pages", async (assert) => {
   );
 });
 
-QUnit.test("Clearing state after leaving a category", async (assert) => {
+test("Clearing state after leaving a category", async (assert) => {
   await visit("/c/dev");
   assert.ok(
     exists(".topic-list-item[data-topic-id=11994] .topic-excerpt"),
@@ -81,7 +82,7 @@ QUnit.test("Clearing state after leaving a category", async (assert) => {
   );
 });
 
-QUnit.test("Live update unread state", async (assert) => {
+test("Live update unread state", async (assert) => {
   await visit("/");
   assert.ok(
     exists(".topic-list-item:not(.visited) a[data-topic-id='11995']"),
@@ -110,7 +111,7 @@ QUnit.test("Live update unread state", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "Using period chooser when query params are present",
   async (assert) => {
     await visit("/top?f=foo&d=bar");

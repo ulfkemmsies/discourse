@@ -1,3 +1,5 @@
+import { skip } from "qunit";
+import { test } from "qunit";
 import I18n from "I18n";
 import { withPluginApi } from "discourse/lib/plugin-api";
 import selectKit from "discourse/tests/helpers/select-kit-helper";
@@ -13,7 +15,7 @@ acceptance("Topic", {
   },
 });
 
-QUnit.test("Reply as new topic", async (assert) => {
+test("Reply as new topic", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click("button.share:eq(0)");
   await click(".reply-as-new-topic a");
@@ -32,7 +34,7 @@ QUnit.test("Reply as new topic", async (assert) => {
   );
 });
 
-QUnit.test("Reply as new message", async (assert) => {
+test("Reply as new message", async (assert) => {
   await visit("/t/pm-for-testing/12");
   await click("button.share:eq(0)");
   await click(".reply-as-new-topic a");
@@ -66,14 +68,14 @@ QUnit.test("Reply as new message", async (assert) => {
   );
 });
 
-QUnit.test("Share Modal", async (assert) => {
+test("Share Modal", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click(".topic-post:first-child button.share");
 
   assert.ok(exists("#share-link"), "it shows the share modal");
 });
 
-QUnit.test("Showing and hiding the edit controls", async (assert) => {
+test("Showing and hiding the edit controls", async (assert) => {
   await visit("/t/internationalization-localization/280");
 
   await click("#topic-title .d-icon-pencil-alt");
@@ -89,7 +91,7 @@ QUnit.test("Showing and hiding the edit controls", async (assert) => {
   assert.ok(!exists("#edit-title"), "it hides the editing controls");
 });
 
-QUnit.test("Updating the topic title and category", async (assert) => {
+test("Updating the topic title and category", async (assert) => {
   const categoryChooser = selectKit(".title-wrapper .category-chooser");
 
   await visit("/t/internationalization-localization/280");
@@ -112,7 +114,7 @@ QUnit.test("Updating the topic title and category", async (assert) => {
   );
 });
 
-QUnit.test("Marking a topic as wiki", async (assert) => {
+test("Marking a topic as wiki", async (assert) => {
   await visit("/t/internationalization-localization/280");
 
   assert.ok(find("a.wiki").length === 0, "it does not show the wiki icon");
@@ -124,7 +126,7 @@ QUnit.test("Marking a topic as wiki", async (assert) => {
   assert.ok(find("a.wiki").length === 1, "it shows the wiki icon");
 });
 
-QUnit.test("Visit topic routes", async (assert) => {
+test("Visit topic routes", async (assert) => {
   await visit("/t/12");
 
   assert.equal(
@@ -142,7 +144,7 @@ QUnit.test("Visit topic routes", async (assert) => {
   );
 });
 
-QUnit.test("Updating the topic title with emojis", async (assert) => {
+test("Updating the topic title with emojis", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click("#topic-title .d-icon-pencil-alt");
 
@@ -157,7 +159,7 @@ QUnit.test("Updating the topic title with emojis", async (assert) => {
   );
 });
 
-QUnit.test("Updating the topic title with unicode emojis", async (assert) => {
+test("Updating the topic title with unicode emojis", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click("#topic-title .d-icon-pencil-alt");
 
@@ -172,7 +174,7 @@ QUnit.test("Updating the topic title with unicode emojis", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "Updating the topic title with unicode emojis without whitespaces",
   async function (assert) {
     this.siteSettings.enable_inline_emoji_translation = true;
@@ -191,7 +193,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Suggested topics", async (assert) => {
+test("Suggested topics", async (assert) => {
   await visit("/t/internationalization-localization/280");
 
   assert.equal(
@@ -200,7 +202,7 @@ QUnit.test("Suggested topics", async (assert) => {
   );
 });
 
-QUnit.skip("Deleting a topic", async (assert) => {
+skip("Deleting a topic", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click(".topic-post:eq(0) button.show-more-actions");
   await click(".widget-button.delete");
@@ -208,7 +210,7 @@ QUnit.skip("Deleting a topic", async (assert) => {
   assert.ok(exists(".widget-button.recover"), "it shows the recover button");
 });
 
-QUnit.test("Group category moderator posts", async (assert) => {
+test("Group category moderator posts", async (assert) => {
   await visit("/t/topic-for-group-moderators/2480");
 
   assert.ok(exists(".category-moderator"), "it has a class applied");
@@ -223,7 +225,7 @@ acceptance("Topic featured links", {
   },
 });
 
-QUnit.skip("remove featured link", async (assert) => {
+skip("remove featured link", async (assert) => {
   await visit("/t/-/299/1");
   assert.ok(
     exists(".title-wrapper .topic-featured-link"),
@@ -241,7 +243,7 @@ QUnit.skip("remove featured link", async (assert) => {
   assert.ok(!exists(".title-wrapper .topic-featured-link"), "link is gone");
 });
 
-QUnit.test("Converting to a public topic", async (assert) => {
+test("Converting to a public topic", async (assert) => {
   await visit("/t/test-pm/34");
   assert.ok(exists(".private_message"));
   await click(".toggle-admin-menu");
@@ -255,7 +257,7 @@ QUnit.test("Converting to a public topic", async (assert) => {
   assert.ok(!exists(".private_message"));
 });
 
-QUnit.test("Unpinning unlisted topic", async (assert) => {
+test("Unpinning unlisted topic", async (assert) => {
   await visit("/t/internationalization-localization/280");
 
   await click(".toggle-admin-menu");
@@ -269,7 +271,7 @@ QUnit.test("Unpinning unlisted topic", async (assert) => {
   assert.ok(exists(".topic-admin-pin"), "it should show the multi select menu");
 });
 
-QUnit.test("selecting posts", async (assert) => {
+test("selecting posts", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click(".toggle-admin-menu");
   await click(".topic-admin-multi-select .btn");
@@ -285,7 +287,7 @@ QUnit.test("selecting posts", async (assert) => {
   );
 });
 
-QUnit.test("select below", async (assert) => {
+test("select below", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click(".toggle-admin-menu");
   await click(".topic-admin-multi-select .btn");
@@ -308,7 +310,7 @@ QUnit.test("select below", async (assert) => {
   );
 });
 
-QUnit.test("View Hidden Replies", async (assert) => {
+test("View Hidden Replies", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click(".gap");
 
@@ -325,7 +327,7 @@ function selectText(selector) {
   selection.addRange(range);
 }
 
-QUnit.test("Quoting a quote keeps the original poster name", async (assert) => {
+test("Quoting a quote keeps the original poster name", async (assert) => {
   await visit("/t/internationalization-localization/280");
   selectText("#post_5 blockquote");
   await click(".quote-button .insert-quote");
@@ -337,7 +339,7 @@ QUnit.test("Quoting a quote keeps the original poster name", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "Quoting a quote of a different topic keeps the original topic title",
   async (assert) => {
     await visit("/t/internationalization-localization/280");
@@ -354,7 +356,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "Quoting a quote with the Reply button keeps the original poster name",
   async (assert) => {
     await visit("/t/internationalization-localization/280");
@@ -369,7 +371,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "Quoting a quote with replyAsNewTopic keeps the original poster name",
   async (assert) => {
     await visit("/t/internationalization-localization/280");
@@ -385,7 +387,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "Quoting by selecting text can mark the quote as full",
   async (assert) => {
     await visit("/t/internationalization-localization/280");
@@ -411,7 +413,7 @@ acceptance("Topic with title decorated", {
   },
 });
 
-QUnit.test("Decorate topic title", async (assert) => {
+test("Decorate topic title", async (assert) => {
   await visit("/t/internationalization-localization/280");
 
   assert.ok(

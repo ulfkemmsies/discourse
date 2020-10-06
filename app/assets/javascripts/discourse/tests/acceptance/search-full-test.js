@@ -1,3 +1,5 @@
+import { skip } from "qunit";
+import { test } from "qunit";
 import selectKit from "discourse/tests/helpers/select-kit-helper";
 import {
   selectDate,
@@ -87,7 +89,7 @@ acceptance("Search - Full Page", {
   },
 });
 
-QUnit.test("perform various searches", async (assert) => {
+test("perform various searches", async (assert) => {
   await visit("/search");
 
   assert.ok($("body.search-page").length, "has body class");
@@ -107,7 +109,7 @@ QUnit.test("perform various searches", async (assert) => {
   assert.ok(find(".fps-topic").length === 1, "has one post");
 });
 
-QUnit.test("escape search term", async (assert) => {
+test("escape search term", async (assert) => {
   await visit("/search");
   await fillIn(".search-query", "@<script>prompt(1337)</script>gmail.com");
 
@@ -119,7 +121,7 @@ QUnit.test("escape search term", async (assert) => {
   );
 });
 
-QUnit.skip("update username through advanced search ui", async (assert) => {
+skip("update username through advanced search ui", async (assert) => {
   await visit("/search");
   await fillIn(".search-query", "none");
   await fillIn(".search-advanced-options .user-selector", "admin");
@@ -152,7 +154,7 @@ QUnit.skip("update username through advanced search ui", async (assert) => {
   });
 });
 
-QUnit.test("update category through advanced search ui", async (assert) => {
+test("update category through advanced search ui", async (assert) => {
   const categoryChooser = selectKit(
     ".search-advanced-options .category-chooser"
   );
@@ -176,7 +178,7 @@ QUnit.test("update category through advanced search ui", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "update in:title filter through advanced search ui",
   async (assert) => {
     await visit("/search");
@@ -202,7 +204,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "update in:likes filter through advanced search ui",
   async (assert) => {
     await visit("/search");
@@ -221,7 +223,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "update in:personal filter through advanced search ui",
   async (assert) => {
     await visit("/search");
@@ -248,7 +250,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "update in:seen filter through advanced search ui",
   async (assert) => {
     await visit("/search");
@@ -275,7 +277,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("update in filter through advanced search ui", async (assert) => {
+test("update in filter through advanced search ui", async (assert) => {
   const inSelector = selectKit(".search-advanced-options .select-kit#in");
 
   await visit("/search");
@@ -296,7 +298,7 @@ QUnit.test("update in filter through advanced search ui", async (assert) => {
   );
 });
 
-QUnit.test("update status through advanced search ui", async (assert) => {
+test("update status through advanced search ui", async (assert) => {
   const statusSelector = selectKit(
     ".search-advanced-options .select-kit#status"
   );
@@ -319,7 +321,7 @@ QUnit.test("update status through advanced search ui", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "doesn't update status filter header if wrong value entered through searchbox",
   async (assert) => {
     const statusSelector = selectKit(
@@ -334,7 +336,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "doesn't update in filter header if wrong value entered through searchbox",
   async (assert) => {
     const inSelector = selectKit(".search-advanced-options .select-kit#in");
@@ -347,7 +349,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("update post time through advanced search ui", async (assert) => {
+test("update post time through advanced search ui", async (assert) => {
   await visit("/search?expanded=true&q=after:2018-08-22");
 
   assert.equal(
@@ -380,7 +382,7 @@ QUnit.test("update post time through advanced search ui", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "update min post count through advanced search ui",
   async (assert) => {
     await visit("/search");
@@ -400,7 +402,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "update max post count through advanced search ui",
   async (assert) => {
     await visit("/search");
@@ -420,7 +422,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("validate advanced search when initially empty", async (assert) => {
+test("validate advanced search when initially empty", async (assert) => {
   await visit("/search?expanded=true");
   await click(".search-advanced-options .in-likes");
 

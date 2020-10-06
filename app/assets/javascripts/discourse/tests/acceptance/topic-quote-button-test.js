@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import I18n from "I18n";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
@@ -19,7 +20,7 @@ acceptance("Topic - Quote button - logged in", {
   },
 });
 
-QUnit.test(
+test(
   "Does not show the quote share buttons by default",
   async (assert) => {
     await visit("/t/internationalization-localization/280");
@@ -33,7 +34,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "Shows quote share buttons with the right site settings",
   async function (assert) {
     this.siteSettings.share_quote_visibility = "all";
@@ -61,7 +62,7 @@ acceptance("Topic - Quote button - anonymous", {
   },
 });
 
-QUnit.test(
+test(
   "Shows quote share buttons with the right site settings",
   async function (assert) {
     await visit("/t/internationalization-localization/280");
@@ -84,7 +85,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "Shows single share button when site setting only has one item",
   async function (assert) {
     this.siteSettings.share_quote_buttons = "twitter";
@@ -105,7 +106,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Shows nothing when visibility is disabled", async function (
+test("Shows nothing when visibility is disabled", async function (
   assert
 ) {
   this.siteSettings.share_quote_visibility = "none";

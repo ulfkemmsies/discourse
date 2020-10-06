@@ -1,7 +1,8 @@
+import { test, module } from "qunit";
 import { formattedReminderTime } from "discourse/lib/bookmark";
 import { fakeTime } from "discourse/tests/helpers/qunit-helpers";
 
-QUnit.module("lib:bookmark", {
+module("lib:bookmark", {
   beforeEach() {
     fakeTime("2020-04-11 08:00:00", "Australia/Brisbane");
   },
@@ -11,7 +12,7 @@ QUnit.module("lib:bookmark", {
   },
 });
 
-QUnit.test(
+test(
   "formattedReminderTime works when the reminder time is tomorrow",
   (assert) => {
     let reminderAt = "2020-04-12 09:45:00";
@@ -25,7 +26,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "formattedReminderTime works when the reminder time is today",
   (assert) => {
     let reminderAt = "2020-04-11 09:45:00";
@@ -39,7 +40,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "formattedReminderTime works when the reminder time is in the future",
   (assert) => {
     let reminderAt = "2020-04-15 09:45:00";

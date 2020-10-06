@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 import { withPluginApi } from "discourse/lib/plugin-api";
 
@@ -38,7 +39,7 @@ acceptance("Plugin Outlet - Decorator", {
   },
 });
 
-QUnit.test(
+test(
   "Calls the plugin callback with the rendered outlet",
   async (assert) => {
     await visit("/");

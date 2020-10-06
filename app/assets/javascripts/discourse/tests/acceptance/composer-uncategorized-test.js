@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import selectKit from "discourse/tests/helpers/select-kit-helper";
 import {
   acceptance,
@@ -15,7 +16,7 @@ acceptance(
   }
 );
 
-QUnit.test("Disable body until category is selected", async (assert) => {
+test("Disable body until category is selected", async (assert) => {
   updateCurrentUser({ moderator: false, admin: false, trust_level: 1 });
 
   await visit("/");
@@ -86,7 +87,7 @@ acceptance(
   }
 );
 
-QUnit.test(
+test(
   "Enable composer/body if no topic templates present",
   async (assert) => {
     updateCurrentUser({ moderator: false, admin: false, trust_level: 1 });

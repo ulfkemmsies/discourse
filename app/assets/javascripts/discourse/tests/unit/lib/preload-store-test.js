@@ -1,13 +1,14 @@
+import { test, module } from "qunit";
 import PreloadStore from "discourse/lib/preload-store";
 import { Promise } from "rsvp";
 
-QUnit.module("preload-store", {
+module("preload-store", {
   beforeEach() {
     PreloadStore.store("bane", "evil");
   },
 });
 
-QUnit.test("get", (assert) => {
+test("get", (assert) => {
   assert.blank(PreloadStore.get("joker"), "returns blank for a missing key");
   assert.equal(
     PreloadStore.get("bane"),
@@ -16,19 +17,19 @@ QUnit.test("get", (assert) => {
   );
 });
 
-QUnit.test("remove", (assert) => {
+test("remove", (assert) => {
   PreloadStore.remove("bane");
   assert.blank(PreloadStore.get("bane"), "removes the value if the key exists");
 });
 
-QUnit.test(
+test(
   "getAndRemove returns a promise that resolves to null",
   async (assert) => {
     assert.blank(await PreloadStore.getAndRemove("joker"));
   }
 );
 
-QUnit.test(
+test(
   "getAndRemove returns a promise that resolves to the result of the finder",
   async (assert) => {
     const finder = () => "batdance";
@@ -38,7 +39,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "getAndRemove returns a promise that resolves to the result of the finder's promise",
   async (assert) => {
     const finder = () => Promise.resolve("hahahah");
@@ -48,7 +49,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "returns a promise that rejects with the result of the finder's rejected promise",
   async (assert) => {
     const finder = () => Promise.reject("error");
@@ -59,7 +60,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("returns a promise that resolves to 'evil'", async (assert) => {
+test("returns a promise that resolves to 'evil'", async (assert) => {
   const result = await PreloadStore.getAndRemove("bane");
   assert.equal(result, "evil");
 });

@@ -1,3 +1,4 @@
+import { test, module } from "qunit";
 import { setResolverOption, buildResolver } from "discourse-common/resolver";
 
 let originalTemplates;
@@ -17,7 +18,7 @@ function setTemplates(lookupTemplateStrings) {
 
 const DiscourseResolver = buildResolver("discourse");
 
-QUnit.module("lib:resolver", {
+module("lib:resolver", {
   beforeEach() {
     originalTemplates = Ember.TEMPLATES;
     Ember.TEMPLATES = {};
@@ -30,7 +31,7 @@ QUnit.module("lib:resolver", {
   },
 });
 
-QUnit.test("finds templates in top level dir", (assert) => {
+test("finds templates in top level dir", (assert) => {
   setTemplates(["foobar", "fooBar", "foo_bar", "foo.bar"]);
 
   lookupTemplate(assert, "template:foobar", "foobar", "by lowcased name");
@@ -39,7 +40,7 @@ QUnit.test("finds templates in top level dir", (assert) => {
   lookupTemplate(assert, "template:foo.bar", "foo.bar", "by dotted name");
 });
 
-QUnit.test("finds templates in first-level subdir", (assert) => {
+test("finds templates in first-level subdir", (assert) => {
   setTemplates(["foo/bar_baz"]);
 
   lookupTemplate(
@@ -68,7 +69,7 @@ QUnit.test("finds templates in first-level subdir", (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "resolves precedence between overlapping top level dir and first level subdir templates",
   (assert) => {
     setTemplates(["fooBar", "foo_bar", "foo.bar", "foo/bar"]);
@@ -94,7 +95,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("finds templates in subdir deeper than one level", (assert) => {
+test("finds templates in subdir deeper than one level", (assert) => {
   setTemplates(["foo/bar/baz/qux"]);
 
   lookupTemplate(
@@ -148,7 +149,7 @@ QUnit.test("finds templates in subdir deeper than one level", (assert) => {
   );
 });
 
-QUnit.test("resolves mobile templates to 'mobile/' namespace", (assert) => {
+test("resolves mobile templates to 'mobile/' namespace", (assert) => {
   setTemplates(["mobile/foo", "bar", "mobile/bar", "baz"]);
 
   setResolverOption("mobileView", true);
@@ -173,7 +174,7 @@ QUnit.test("resolves mobile templates to 'mobile/' namespace", (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "resolves plugin templates to 'javascripts/' namespace",
   (assert) => {
     setTemplates(["javascripts/foo", "bar", "javascripts/bar", "baz"]);
@@ -199,7 +200,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "resolves templates with 'admin' prefix to 'admin/templates/' namespace",
   (assert) => {
     setTemplates([
@@ -256,7 +257,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "returns 'not_found' template when template name cannot be resolved",
   (assert) => {
     setTemplates(["not_found"]);

@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 
 acceptance("Composer - Onebox", {
@@ -8,7 +9,7 @@ acceptance("Composer - Onebox", {
   },
 });
 
-QUnit.test(
+test(
   "Preview update should respect max_oneboxes_per_post site setting",
   async (assert) => {
     await visit("/t/internationalization-localization/280");

@@ -1,3 +1,5 @@
+import { skip } from "qunit";
+import { test } from "qunit";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 import DiscourseURL from "discourse/lib/url";
 
@@ -10,7 +12,7 @@ acceptance("User Card - Show Local Time", {
   settings: { display_local_time_in_user_card: true },
 });
 
-QUnit.skip("user card local time", async (assert) => {
+skip("user card local time", async (assert) => {
   User.current().changeTimezone("Australia/Brisbane");
   let cardResponse = Object.assign({}, userFixtures["/u/eviltrout/card.json"]);
   cardResponse.user.timezone = "Australia/Perth";
@@ -60,7 +62,7 @@ QUnit.skip("user card local time", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "user card local time - does not update timezone for another user",
   async (assert) => {
     User.current().changeTimezone("Australia/Brisbane");
@@ -85,7 +87,7 @@ QUnit.test(
 
 acceptance("User Card", { loggedIn: true });
 
-QUnit.skip("user card", async (assert) => {
+skip("user card", async (assert) => {
   await visit("/t/internationalization-localization/280");
   assert.ok(invisible(".user-card"), "user card is invisible by default");
 

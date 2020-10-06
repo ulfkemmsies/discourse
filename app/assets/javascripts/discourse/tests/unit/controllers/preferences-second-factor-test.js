@@ -1,6 +1,8 @@
+import { moduleFor } from "ember-qunit";
+import { test } from "qunit";
 moduleFor("controller:preferences/second-factor");
 
-QUnit.test(
+test(
   "displayOAuthWarning when OAuth login methods are enabled",
   function (assert) {
     const controller = this.subject({

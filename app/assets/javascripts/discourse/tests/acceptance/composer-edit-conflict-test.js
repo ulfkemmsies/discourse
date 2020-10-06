@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import I18n from "I18n";
 import { acceptance } from "discourse/tests/helpers/qunit-helpers";
 import pretender from "discourse/tests/helpers/create-pretender";
@@ -6,7 +7,7 @@ acceptance("Composer - Edit conflict", {
   loggedIn: true,
 });
 
-QUnit.test("Edit a post that causes an edit conflict", async (assert) => {
+test("Edit a post that causes an edit conflict", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click(".topic-post:eq(0) button.show-more-actions");
   await click(".topic-post:eq(0) button.edit");
@@ -47,7 +48,7 @@ function handleDraftPretender(assert) {
   });
 }
 
-QUnit.test(
+test(
   "Should not send originalText when posting a new reply",
   async (assert) => {
     handleDraftPretender(assert);
@@ -61,7 +62,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Should send originalText when editing a reply", async (assert) => {
+test("Should send originalText when editing a reply", async (assert) => {
   handleDraftPretender(assert);
 
   await visit("/t/internationalization-localization/280");

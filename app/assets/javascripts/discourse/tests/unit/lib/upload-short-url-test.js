@@ -1,3 +1,4 @@
+import { test, module } from "qunit";
 import {
   lookupCachedUploadUrl,
   resolveAllShortUrls,
@@ -85,13 +86,13 @@ function stubUrls(imageSrcs, attachmentSrcs, otherMediaSrcs) {
         .join("")
   );
 }
-QUnit.module("lib:pretty-text/upload-short-url", {
+module("lib:pretty-text/upload-short-url", {
   afterEach() {
     resetCache();
   },
 });
 
-QUnit.test("resolveAllShortUrls", async (assert) => {
+test("resolveAllShortUrls", async (assert) => {
   stubUrls();
   let lookup;
 
@@ -142,7 +143,7 @@ QUnit.test("resolveAllShortUrls", async (assert) => {
   });
 });
 
-QUnit.test(
+test(
   "resolveAllShortUrls - href + src replaced correctly",
   async (assert) => {
     stubUrls();
@@ -168,7 +169,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "resolveAllShortUrls - url with full origin replaced correctly",
   async (assert) => {
     stubUrls();
@@ -182,7 +183,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "resolveAllShortUrls - when secure media is enabled use the attachment full URL",
   async (assert) => {
     stubUrls(
@@ -206,7 +207,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("resolveAllShortUrls - scoped", async (assert) => {
+test("resolveAllShortUrls - scoped", async (assert) => {
   stubUrls();
   let lookup;
 

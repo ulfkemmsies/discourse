@@ -1,9 +1,11 @@
+import { skip } from "qunit";
+import { test, module } from "qunit";
 import { loadScript, cacheBuster } from "discourse/lib/load-script";
 import { PUBLIC_JS_VERSIONS as jsVersions } from "discourse/lib/public-js-versions";
 
-QUnit.module("lib:load-script");
+module("lib:load-script");
 
-QUnit.skip(
+skip(
   "load with a script tag, and callbacks are only executed after script is loaded",
   async (assert) => {
     assert.ok(
@@ -21,7 +23,7 @@ QUnit.skip(
   }
 );
 
-QUnit.test("works when a value is not present", (assert) => {
+test("works when a value is not present", (assert) => {
   assert.equal(
     cacheBuster("/javascripts/my-script.js"),
     "/javascripts/my-script.js"
@@ -32,7 +34,7 @@ QUnit.test("works when a value is not present", (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "generates URLs with version number in the query params",
   (assert) => {
     assert.equal(

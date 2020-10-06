@@ -1,3 +1,5 @@
+import { moduleFor } from "ember-qunit";
+import { test } from "qunit";
 import EmberObject from "@ember/object";
 import { mapRoutes } from "discourse/mapping-router";
 import createStore from "discourse/tests/helpers/create-store";
@@ -9,7 +11,7 @@ moduleFor("controller:reorder-categories", "controller:reorder-categories", {
   needs: ["controller:modal"],
 });
 
-QUnit.test("reorder set unique position number", function (assert) {
+test("reorder set unique position number", function (assert) {
   const store = createStore();
 
   const categories = [];
@@ -29,7 +31,7 @@ QUnit.test("reorder set unique position number", function (assert) {
     });
 });
 
-QUnit.test(
+test(
   "reorder places subcategories after their parent categories, while maintaining the relative order",
   function (assert) {
     const store = createStore();
@@ -72,7 +74,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "changing the position number of a category should place it at given position",
   function (assert) {
     const store = createStore();
@@ -112,7 +114,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "changing the position number of a category should place it at given position and respect children",
   function (assert) {
     const store = createStore();
@@ -159,7 +161,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "changing the position through click on arrow of a category should place it at given position and respect children",
   function (assert) {
     const store = createStore();

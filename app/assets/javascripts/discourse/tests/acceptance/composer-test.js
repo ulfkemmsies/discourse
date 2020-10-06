@@ -1,3 +1,5 @@
+import { skip } from "qunit";
+import { test } from "qunit";
 import I18n from "I18n";
 import { run } from "@ember/runloop";
 import selectKit from "discourse/tests/helpers/select-kit-helper";
@@ -18,7 +20,7 @@ acceptance("Composer", {
   },
 });
 
-QUnit.skip("Tests the Composer controls", async (assert) => {
+skip("Tests the Composer controls", async (assert) => {
   await visit("/");
   assert.ok(exists("#create-topic"), "the create button is visible");
 
@@ -96,7 +98,7 @@ QUnit.skip("Tests the Composer controls", async (assert) => {
   assert.ok(!exists(".bootbox.modal"), "the confirmation can be cancelled");
 });
 
-QUnit.test("Composer upload placeholder", async (assert) => {
+test("Composer upload placeholder", async (assert) => {
   await visit("/");
   await click("#create-topic");
 
@@ -189,7 +191,7 @@ QUnit.test("Composer upload placeholder", async (assert) => {
   );
 });
 
-QUnit.test("Create a topic with server side errors", async (assert) => {
+test("Create a topic with server side errors", async (assert) => {
   await visit("/");
   await click("#create-topic");
   await fillIn("#reply-title", "this title triggers an error");
@@ -201,7 +203,7 @@ QUnit.test("Create a topic with server side errors", async (assert) => {
   assert.ok(exists(".d-editor-input"), "the composer input is visible");
 });
 
-QUnit.test("Create a Topic", async (assert) => {
+test("Create a Topic", async (assert) => {
   await visit("/");
   await click("#create-topic");
   await fillIn("#reply-title", "Internationalization Localization");
@@ -214,7 +216,7 @@ QUnit.test("Create a Topic", async (assert) => {
   );
 });
 
-QUnit.test("Create an enqueued Topic", async (assert) => {
+test("Create an enqueued Topic", async (assert) => {
   await visit("/");
   await click("#create-topic");
   await fillIn("#reply-title", "Internationalization Localization");
@@ -227,7 +229,7 @@ QUnit.test("Create an enqueued Topic", async (assert) => {
   assert.ok(invisible(".d-modal"), "the modal can be dismissed");
 });
 
-QUnit.test("Can display a message and route to a URL", async (assert) => {
+test("Can display a message and route to a URL", async (assert) => {
   await visit("/");
   await click("#create-topic");
   await fillIn("#reply-title", "This title doesn't matter");
@@ -247,7 +249,7 @@ QUnit.test("Can display a message and route to a URL", async (assert) => {
   );
 });
 
-QUnit.test("Create a Reply", async (assert) => {
+test("Create a Reply", async (assert) => {
   await visit("/t/internationalization-localization/280");
 
   assert.ok(
@@ -267,7 +269,7 @@ QUnit.test("Create a Reply", async (assert) => {
   );
 });
 
-QUnit.test("Can edit a post after starting a reply", async (assert) => {
+test("Can edit a post after starting a reply", async (assert) => {
   await visit("/t/internationalization-localization/280");
 
   await click("#topic-footer-buttons .create");
@@ -285,7 +287,7 @@ QUnit.test("Can edit a post after starting a reply", async (assert) => {
   );
 });
 
-QUnit.test("Posting on a different topic", async (assert) => {
+test("Posting on a different topic", async (assert) => {
   await visit("/t/internationalization-localization/280");
   await click("#topic-footer-buttons .btn.create");
   await fillIn(".d-editor-input", "this is the content for a different topic");
@@ -302,7 +304,7 @@ QUnit.test("Posting on a different topic", async (assert) => {
   );
 });
 
-QUnit.test("Create an enqueued Reply", async (assert) => {
+test("Create an enqueued Reply", async (assert) => {
   await visit("/t/internationalization-localization/280");
 
   assert.notOk(find(".pending-posts .reviewable-item").length);
@@ -326,7 +328,7 @@ QUnit.test("Create an enqueued Reply", async (assert) => {
   assert.ok(find(".pending-posts .reviewable-item").length);
 });
 
-QUnit.test("Edit the first post", async (assert) => {
+test("Edit the first post", async (assert) => {
   await visit("/t/internationalization-localization/280");
 
   assert.ok(
@@ -364,7 +366,7 @@ QUnit.test("Edit the first post", async (assert) => {
   );
 });
 
-QUnit.test("Composer can switch between edits", async (assert) => {
+test("Composer can switch between edits", async (assert) => {
   await visit("/t/this-is-a-test-topic/9");
 
   await click(".topic-post:eq(0) button.edit");
@@ -381,7 +383,7 @@ QUnit.test("Composer can switch between edits", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "Composer with dirty edit can toggle to another edit",
   async (assert) => {
     await visit("/t/this-is-a-test-topic/9");
@@ -400,7 +402,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Composer can toggle between edit and reply", async (assert) => {
+test("Composer can toggle between edit and reply", async (assert) => {
   await visit("/t/this-is-a-test-topic/9");
 
   await click(".topic-post:eq(0) button.edit");
@@ -419,7 +421,7 @@ QUnit.test("Composer can toggle between edit and reply", async (assert) => {
   );
 });
 
-QUnit.test("Composer can toggle whispers", async (assert) => {
+test("Composer can toggle whispers", async (assert) => {
   const menu = selectKit(".toolbar-popup-menu-options");
 
   await visit("/t/this-is-a-test-topic/9");
@@ -454,7 +456,7 @@ QUnit.test("Composer can toggle whispers", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "Composer can toggle layouts (open, fullscreen and draft)",
   async (assert) => {
     await visit("/t/this-is-a-test-topic/9");
@@ -496,7 +498,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "Composer can toggle between reply and createTopic",
   async (assert) => {
     await visit("/t/this-is-a-test-topic/9");
@@ -545,7 +547,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Composer with dirty reply can toggle to edit", async (assert) => {
+test("Composer with dirty reply can toggle to edit", async (assert) => {
   await visit("/t/this-is-a-test-topic/9");
 
   await click(".topic-post:eq(0) button.reply");
@@ -560,7 +562,7 @@ QUnit.test("Composer with dirty reply can toggle to edit", async (assert) => {
   );
 });
 
-QUnit.test(
+test(
   "Composer draft with dirty reply can toggle to edit",
   async (assert) => {
     await visit("/t/this-is-a-test-topic/9");
@@ -583,7 +585,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "Composer draft can switch to draft in new context without destroying current draft",
   async (assert) => {
     await visit("/t/this-is-a-test-topic/9");
@@ -608,7 +610,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("Checks for existing draft", async (assert) => {
+test("Checks for existing draft", async (assert) => {
   try {
     toggleCheckDraftPopup(true);
 
@@ -625,7 +627,7 @@ QUnit.test("Checks for existing draft", async (assert) => {
   }
 });
 
-QUnit.test("Can switch states without abandon popup", async (assert) => {
+test("Can switch states without abandon popup", async (assert) => {
   try {
     toggleCheckDraftPopup(true);
 
@@ -673,7 +675,7 @@ QUnit.test("Can switch states without abandon popup", async (assert) => {
   sandbox.restore();
 });
 
-QUnit.test("Loading draft also replaces the recipients", async (assert) => {
+test("Loading draft also replaces the recipients", async (assert) => {
   try {
     toggleCheckDraftPopup(true);
 
@@ -695,7 +697,7 @@ QUnit.test("Loading draft also replaces the recipients", async (assert) => {
   }
 });
 
-QUnit.test(
+test(
   "Deleting the text content of the first post in a private message",
   async (assert) => {
     await visit("/t/34");
@@ -722,7 +724,7 @@ const assertImageResized = (assert, uploads) => {
   );
 };
 
-QUnit.test("Image resizing buttons", async (assert) => {
+test("Image resizing buttons", async (assert) => {
   await visit("/");
   await click("#create-topic");
 
@@ -828,7 +830,7 @@ QUnit.test("Image resizing buttons", async (assert) => {
   );
 });
 
-QUnit.test("can reply to a private message", async (assert) => {
+test("can reply to a private message", async (assert) => {
   let submitted;
 
   /* global server */

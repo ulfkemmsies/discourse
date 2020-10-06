@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import {
   acceptance,
   updateCurrentUser,
@@ -5,7 +6,7 @@ import {
 
 acceptance("Topic - Admin Menu Anonymous Users", { loggedIn: false });
 
-QUnit.test("Enter as a regular user", async (assert) => {
+test("Enter as a regular user", async (assert) => {
   await visit("/t/internationalization-localization/280");
   assert.ok(exists("#topic"), "The topic was rendered");
   assert.ok(
@@ -16,7 +17,7 @@ QUnit.test("Enter as a regular user", async (assert) => {
 
 acceptance("Topic - Admin Menu", { loggedIn: true });
 
-QUnit.test(
+test(
   "Enter as a user with group moderator permissions",
   async (assert) => {
     updateCurrentUser({ moderator: false, admin: false, trust_level: 1 });
@@ -30,7 +31,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "Enter as a user with moderator and admin permissions",
   async (assert) => {
     updateCurrentUser({ moderator: true, admin: true, trust_level: 4 });
@@ -44,7 +45,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "Toggle the menu as admin focuses the first item",
   async (assert) => {
     updateCurrentUser({ admin: true });

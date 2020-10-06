@@ -1,8 +1,9 @@
+import { test, module } from "qunit";
 import userSearch from "discourse/lib/user-search";
 import { CANCELLED_STATUS } from "discourse/lib/autocomplete";
 import pretender from "discourse/tests/helpers/create-pretender";
 
-QUnit.module("lib:user-search", {
+module("lib:user-search", {
   beforeEach() {
     const response = (object) => {
       return [200, { "Content-Type": "application/json" }, object];
@@ -85,7 +86,7 @@ QUnit.module("lib:user-search", {
   },
 });
 
-QUnit.test("it flushes cache when switching categories", async (assert) => {
+test("it flushes cache when switching categories", async (assert) => {
   let results = await userSearch({ term: "hello", categoryId: 1 });
   assert.equal(results[0].username, "category_1");
   assert.equal(results.length, 1);
@@ -100,7 +101,7 @@ QUnit.test("it flushes cache when switching categories", async (assert) => {
   assert.equal(results.length, 1);
 });
 
-QUnit.test(
+test(
   "it returns cancel when eager completing with no results",
   async (assert) => {
     // Do everything twice, to check the cache works correctly
@@ -126,7 +127,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "it places groups unconditionally for exact match",
   async (assert) => {
     let results = await userSearch({ term: "Team" });
@@ -134,12 +135,12 @@ QUnit.test(
   }
 );
 
-QUnit.test("it strips @ from the beginning", async (assert) => {
+test("it strips @ from the beginning", async (assert) => {
   let results = await userSearch({ term: "@Team" });
   assert.equal(results[results.length - 1]["name"], "team");
 });
 
-QUnit.test("it skips a search depending on punctuations", async (assert) => {
+test("it skips a search depending on punctuations", async (assert) => {
   let results;
   let skippedTerms = [
     "@sam  s", // double space is not allowed

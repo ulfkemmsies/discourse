@@ -1,3 +1,4 @@
+import { test } from "qunit";
 import { discourseModule } from "discourse/tests/helpers/qunit-helpers";
 import { currentUser } from "discourse/tests/helpers/qunit-helpers";
 
@@ -12,12 +13,12 @@ discourseModule("service:document-title", {
   },
 });
 
-QUnit.test("it updates the document title", function (assert) {
+test("it updates the document title", function (assert) {
   this.documentTitle.setTitle("Test Title");
   assert.equal(document.title, "Test Title", "title is correct");
 });
 
-QUnit.test(
+test(
   "it doesn't display notification counts for anonymous users",
   function (assert) {
     this.documentTitle.setTitle("test notifications");
@@ -29,7 +30,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("it displays notification counts for logged in users", function (
+test("it displays notification counts for logged in users", function (
   assert
 ) {
   this.documentTitle.currentUser = currentUser();
@@ -44,7 +45,7 @@ QUnit.test("it displays notification counts for logged in users", function (
   assert.equal(document.title, "test notifications");
 });
 
-QUnit.test(
+test(
   "it doesn't increment background context counts when focused",
   function (assert) {
     this.documentTitle.setTitle("background context");
@@ -54,7 +55,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "it increments background context counts when not focused",
   function (assert) {
     this.documentTitle.setTitle("background context");

@@ -1,3 +1,5 @@
+import { moduleFor } from "ember-qunit";
+import { test } from "qunit";
 import { logIn } from "discourse/tests/helpers/qunit-helpers";
 import User from "discourse/models/user";
 import KeyboardShortcutInitializer from "discourse/initializers/keyboard-shortcuts";
@@ -26,7 +28,7 @@ function mockMomentTz(dateString) {
   fakeTime(dateString, BookmarkController.userTimezone);
 }
 
-QUnit.test("showLaterToday when later today is tomorrow do not show", function (
+test("showLaterToday when later today is tomorrow do not show", function (
   assert
 ) {
   mockMomentTz("2019-12-11T22:00:00");
@@ -34,7 +36,7 @@ QUnit.test("showLaterToday when later today is tomorrow do not show", function (
   assert.equal(BookmarkController.get("showLaterToday"), false);
 });
 
-QUnit.test(
+test(
   "showLaterToday when later today is after 5pm but before 6pm",
   function (assert) {
     mockMomentTz("2019-12-11T15:00:00");
@@ -42,14 +44,14 @@ QUnit.test(
   }
 );
 
-QUnit.test("showLaterToday when now is after the cutoff time (5pm)", function (
+test("showLaterToday when now is after the cutoff time (5pm)", function (
   assert
 ) {
   mockMomentTz("2019-12-11T17:00:00");
   assert.equal(BookmarkController.get("showLaterToday"), false);
 });
 
-QUnit.test(
+test(
   "showLaterToday when later today is before the end of the day, show",
   function (assert) {
     mockMomentTz("2019-12-11T10:00:00");
@@ -58,7 +60,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("nextWeek gets next week correctly", function (assert) {
+test("nextWeek gets next week correctly", function (assert) {
   mockMomentTz("2019-12-11T08:00:00");
 
   assert.equal(
@@ -67,7 +69,7 @@ QUnit.test("nextWeek gets next week correctly", function (assert) {
   );
 });
 
-QUnit.test("nextMonth gets next month correctly", function (assert) {
+test("nextMonth gets next month correctly", function (assert) {
   mockMomentTz("2019-12-11T08:00:00");
 
   assert.equal(
@@ -76,7 +78,7 @@ QUnit.test("nextMonth gets next month correctly", function (assert) {
   );
 });
 
-QUnit.test("laterThisWeek gets 2 days from now", function (assert) {
+test("laterThisWeek gets 2 days from now", function (assert) {
   mockMomentTz("2019-12-10T08:00:00");
 
   assert.equal(
@@ -85,7 +87,7 @@ QUnit.test("laterThisWeek gets 2 days from now", function (assert) {
   );
 });
 
-QUnit.test(
+test(
   "laterThisWeek returns null if we are at Thursday already",
   function (assert) {
     mockMomentTz("2019-12-12T08:00:00");
@@ -94,18 +96,18 @@ QUnit.test(
   }
 );
 
-QUnit.test("showLaterThisWeek returns true if < Thursday", function (assert) {
+test("showLaterThisWeek returns true if < Thursday", function (assert) {
   mockMomentTz("2019-12-10T08:00:00");
 
   assert.equal(BookmarkController.showLaterThisWeek, true);
 });
 
-QUnit.test("showLaterThisWeek returns false if > Thursday", function (assert) {
+test("showLaterThisWeek returns false if > Thursday", function (assert) {
   mockMomentTz("2019-12-12T08:00:00");
 
   assert.equal(BookmarkController.showLaterThisWeek, false);
 });
-QUnit.test("tomorrow gets tomorrow correctly", function (assert) {
+test("tomorrow gets tomorrow correctly", function (assert) {
   mockMomentTz("2019-12-11T08:00:00");
 
   assert.equal(
@@ -114,7 +116,7 @@ QUnit.test("tomorrow gets tomorrow correctly", function (assert) {
   );
 });
 
-QUnit.test(
+test(
   "startOfDay changes the time of the provided date to 8:00am correctly",
   function (assert) {
     let dt = moment.tz(
@@ -131,7 +133,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "laterToday gets 3 hours from now and if before half-past, it rounds down",
   function (assert) {
     mockMomentTz("2019-12-11T08:13:00");
@@ -143,7 +145,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "laterToday gets 3 hours from now and if after half-past, it rounds up to the next hour",
   function (assert) {
     mockMomentTz("2019-12-11T08:43:00");
@@ -155,7 +157,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "laterToday is capped to 6pm. later today at 3pm = 6pm, 3:30pm = 6pm, 4pm = 6pm, 4:59pm = 6pm",
   function (assert) {
     mockMomentTz("2019-12-11T15:00:00");
@@ -192,17 +194,17 @@ QUnit.test(
   }
 );
 
-QUnit.test("showLaterToday returns false if >= 5PM", function (assert) {
+test("showLaterToday returns false if >= 5PM", function (assert) {
   mockMomentTz("2019-12-11T17:00:01");
   assert.equal(BookmarkController.showLaterToday, false);
 });
 
-QUnit.test("showLaterToday returns false if >= 5PM", function (assert) {
+test("showLaterToday returns false if >= 5PM", function (assert) {
   mockMomentTz("2019-12-11T17:00:01");
   assert.equal(BookmarkController.showLaterToday, false);
 });
 
-QUnit.test(
+test(
   "reminderAt - custom - defaults to 8:00am if the time is not selected",
   function (assert) {
     BookmarkController.customReminderDate = "2028-12-12";
@@ -225,7 +227,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "loadLastUsedCustomReminderDatetime fills the custom reminder date + time if present in localStorage",
   function (assert) {
     mockMomentTz("2019-12-11T08:00:00");
@@ -239,7 +241,7 @@ QUnit.test(
   }
 );
 
-QUnit.test(
+test(
   "loadLastUsedCustomReminderDatetime does not fills the custom reminder date + time if the datetime in localStorage is < now",
   function (assert) {
     mockMomentTz("2019-12-11T08:00:00");
@@ -253,7 +255,7 @@ QUnit.test(
   }
 );
 
-QUnit.test("user timezone updates when the modal is shown", function (assert) {
+test("user timezone updates when the modal is shown", function (assert) {
   User.current().changeTimezone(null);
   let stub = sandbox.stub(moment.tz, "guess").returns("Europe/Moscow");
   BookmarkController.onShow();
@@ -274,7 +276,7 @@ QUnit.test("user timezone updates when the modal is shown", function (assert) {
   stub.restore();
 });
 
-QUnit.test(
+test(
   "opening the modal with an existing bookmark with reminder at prefills the custom reminder type",
   function (assert) {
     let name = "test";

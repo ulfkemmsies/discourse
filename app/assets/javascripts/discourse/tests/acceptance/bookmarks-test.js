@@ -1,3 +1,5 @@
+import { skip } from "qunit";
+import { test } from "qunit";
 import I18n from "I18n";
 import selectKit from "discourse/tests/helpers/select-kit-helper";
 import {
@@ -236,7 +238,7 @@ acceptance("Bookmarking - Mobile", {
   },
 });
 
-QUnit.skip(
+skip(
   "Editing a bookmark that has a Later Today reminder, and it is before 6pm today",
   async (assert) => {
     await acceptanceUseFakeClock("2020-05-04T13:00:00", async () => {

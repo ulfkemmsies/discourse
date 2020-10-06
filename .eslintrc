@@ -2,5 +2,13 @@
   "extends": "eslint-config-discourse",
   "rules": {
     "discourse-ember/global-ember": 2
+  },
+  "globals": {
+    "test": "off",
+    "moduleFor": "off",
+    "moduleForComponent": "off",
+    "QUnit": "off",
+    "testStart": "off",
+    "testDone": "off"
   }
 }
